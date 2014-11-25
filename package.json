@@ -2,7 +2,10 @@
   "name": "qwilr-logger",
   "version": "1.0.0",
   "description": "A small logging utility created for Qwilr app -- https://qwilr.com",
-  "main": "qwilr-logger",
+  "main": "qwilr-logger.coffee",
+  "dependencies" : {
+    "colors": "^1.0.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +13,7 @@
     "type": "git",
     "url": "https://github.com/dylan-baskind/qwilr-logger.git"
   },
-  "author": "",
+  "author": "Dylan Baskind",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dylan-baskind/qwilr-logger/issues"

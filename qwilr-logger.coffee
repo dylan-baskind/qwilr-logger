@@ -4,37 +4,31 @@ module.exports = (options) ->
 	if options?.debug is no
 		return ( -> )
 
-	color = require('cli-color')
+	colors = require('colors/safe')
 	log = console.log
 
 	log.at = (data...) ->
-		route = color.yellow
 		log ""
-		log route("AT: " + data)
-		log route "-------------------------"
+		log ("AT: " + data).yellow
+		log "-------------------------".yellow
 
 	log.doing = (data...) ->
-		doing = color.blueBright
-		log doing(data)
+		log colors.blue( data )
 
 	log.say = (data...) ->
-		say = color.xterm(15)
 		log data
 
 	log.error = (data...) ->
-		error = color.red.bold
 		log ""
-		log "ERROR: ", error(data)
-		log '------------------------------'
+		log colors.red("ERROR: " + data)
+		log colors.red('------------------------------')
 
 	log.success = (data...) ->
-		success = color.green.bold
-		log success(data)
+		log colors.green( data )
 		log ""
 
 	log.note = (data...) ->
-		note = color.cyan
-		log note(data)
+		log colors.cyan( data )
 
 	return log
 
