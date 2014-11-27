@@ -2,15 +2,21 @@ module.exports = (options) ->
 
 	# Now log prints nothing...
 	if options?.debug is no
-		return ( -> )
+		log = ->
+		log.at = ->
+		log.doing = ->
+		log.say = ->
+		log.success = ->
+		log.note = ->
+		return log
 
 	colors = require('colors/safe')
 	log = console.log
 
 	log.at = (data...) ->
 		log ""
-		log ("AT: " + data).yellow
-		log "-------------------------".yellow
+		log colors.yellow("AT: " + data)
+		log colors.yellow("-------------------------")
 
 	log.doing = (data...) ->
 		log colors.blue( data )
