@@ -34,13 +34,14 @@ module.exports = (options) ->
 		return log
 
 	colors = require('colors/safe')
-	
-	log = (data) -> 
-		console.log.apply(console, [ colors.grey(logName), data ] )
+
+	log = (args...) ->
+		args.unshift colors.grey(logName)
+		console.log.apply( console, args )
 
 	log.at = (data...) ->
 		log ""
-		log colors.yellow("AT: " + data)
+		log colors.yellow("AT: ", data )
 		log colors.yellow("-------------------------")
 
 	log.doing = (data...) ->
@@ -51,7 +52,7 @@ module.exports = (options) ->
 
 	log.error = (data...) ->
 		log ""
-		log colors.red( "ERROR: " + data )
+		log colors.red( "ERROR: ", data )
 		log colors.red("------------------------------")
 
 	log.success = (data...) ->
