@@ -34,8 +34,9 @@ module.exports = (options) ->
 		return log
 
 	colors = require('colors/safe')
+	
 	log = (data) -> 
-		console.log colors.grey(logName) + data
+		console.log.apply(console, [ colors.grey(logName), data ] )
 
 	log.at = (data...) ->
 		log ""
