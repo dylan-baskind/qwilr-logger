@@ -22,9 +22,7 @@ module.exports = (options) ->
 			options.name + " "
 		else
 			""
-
-	console.log "LOGNAME = ", logName
-
+			
 	# Stub out the functions 
 	# if we're not in debug mode
 	# so that log prints nothing...
