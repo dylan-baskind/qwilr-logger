@@ -36,6 +36,10 @@ module.exports = (options) ->
 	colors = require('colors/safe')
 
 	log = (args...) ->
+		# We can set the logger to silent 
+		# with this Node environment flag
+		return if process.env.SILENT_LOGGING?
+
 		args.unshift colors.grey(logName)
 		console.log.apply( console, args )
 

@@ -1,0 +1,8 @@
+# General file types to ignore
+.DS_Store
+Thumbs.db
+*.maps
+*.swp
+/**/node_modules
+
+npm-debug.log
