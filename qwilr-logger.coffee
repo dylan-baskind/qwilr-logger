@@ -43,6 +43,8 @@ module.exports = (options) ->
 		args.unshift colors.grey(logName)
 		console.log.apply( console, args )
 
+	log.warn = (data...) ->		
+		log colors.yellow( data )
 
 	log.at = (data...) ->
 		console.log ""
