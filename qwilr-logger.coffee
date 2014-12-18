@@ -32,7 +32,7 @@ module.exports = (options) ->
 		for stubFn in stubs
 			log[stubFn] = ->
 		return log
-
+	
 	colors = require('colors/safe')
 
 	log = (args...) ->
@@ -44,9 +44,13 @@ module.exports = (options) ->
 		console.log.apply( console, args )
 
 	log.at = (data...) ->
-		log ""
-		log colors.yellow("AT: ", data )
-		log colors.yellow("-------------------------")
+		console.log ""
+		log colors.magenta("-------------------------")
+		log colors.magenta("AT: ", data )
+		log colors.magenta("-------------------------")
+
+	log.warn = (data...) ->
+		log colors.yellow( data )
 
 	log.doing = (data...) ->
 		log colors.blue( data )
@@ -55,13 +59,11 @@ module.exports = (options) ->
 		log data
 
 	log.error = (data...) ->
-		log ""
 		log colors.red( "ERROR: ", data )
 		log colors.red("------------------------------")
 
 	log.success = (data...) ->
 		log colors.green( data )
-		log ""
 
 	log.note = (data...) ->
 		log colors.cyan( data )
