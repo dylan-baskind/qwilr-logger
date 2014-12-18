@@ -1,6 +1,6 @@
 {
   "name": "qwilr-logger",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A small logging utility created for Qwilr app -- https://qwilr.com",
   "main": "qwilr-logger.coffee",
   "dependencies": {
