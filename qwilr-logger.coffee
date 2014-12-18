@@ -43,14 +43,12 @@ module.exports = (options) ->
 		args.unshift colors.grey(logName)
 		console.log.apply( console, args )
 
+
 	log.at = (data...) ->
 		console.log ""
 		log colors.magenta("-------------------------")
 		log colors.magenta("AT: ", data )
 		log colors.magenta("-------------------------")
-
-	log.warn = (data...) ->
-		log colors.yellow( data )
 
 	log.doing = (data...) ->
 		log colors.blue( data )
@@ -61,6 +59,11 @@ module.exports = (options) ->
 	log.error = (data...) ->
 		log colors.red( "ERROR: ", data )
 		log colors.red("------------------------------")
+
+		# If we have Raven installed
+		if options.raven?
+			# Capture the error + logger name
+			options.raven.captureError( options.name + ": " + data )
 
 	log.success = (data...) ->
 		log colors.green( data )
