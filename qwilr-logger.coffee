@@ -47,7 +47,10 @@ module.exports = (options) ->
 		log colors.yellow( data )
 
 	log.at = (data...) ->
+		# Space gets output without silent logging.
+		return if process.env.SILENT_LOGGING?
 		console.log ""
+		
 		log colors.magenta("-------------------------")
 		log colors.magenta("AT: ", data )
 		log colors.magenta("-------------------------")
