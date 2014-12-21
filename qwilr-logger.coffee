@@ -22,6 +22,9 @@ module.exports = (options) ->
 			options.name + " "
 		else
 			""
+
+	# We'll default to debug mode, unless specified.
+	options.debug ?= yes
 			
 	# Stub out the functions 
 	# if we're not in debug mode
