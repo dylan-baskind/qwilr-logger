@@ -4,7 +4,8 @@
   "description": "A small logging utility created for Qwilr app -- https://qwilr.com",
   "main": "qwilr-logger.coffee",
   "dependencies": {
-    "colors": "^1.0.3"
+    "colors": "^1.0.3",
+    "lodash": "^2.4.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
