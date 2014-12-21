@@ -46,14 +46,16 @@ module.exports = (options) ->
 	log.warn = (data...) ->		
 		log colors.yellow( data )
 
-	log.at = (data...) ->
+	log.at = (data) ->
 		# Space gets output without silent logging.
 		return if process.env.SILENT_LOGGING?
 		console.log ""
 		
-		log colors.magenta("-------------------------")
+		# NOTE: 7 = "AT: " + a little extra space
+		border = Array(data.length + 7).join '-'
+		log colors.magenta(border)
 		log colors.magenta("AT: ", data )
-		log colors.magenta("-------------------------")
+		log colors.magenta(border)
 
 	log.doing = (data...) ->
 		log colors.blue( data )
