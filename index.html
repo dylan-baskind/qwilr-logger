@@ -45,15 +45,14 @@
 // Require Qwilr Logger
 var qwilrLogger = require("qwilr-logger");
 
-// Instantiate a new logger, with the name 'someLogName'
-var log = qwilrLogger("someLogName");
+// Instantiate a new logger, with the name 'Example Logger'
+var log = qwilrLogger({name: "Example Logger"});
 
 // Log Some Messages
 log("Log something");
 log.at("Main Controller");
 
-// Note you can attach a custom error handler function
-// i.e. Send errors to an error aggregation service.
+// Log an Error
 var crazyError = true;
 if (crazyError){
   log.error("Just had a crazy error");
@@ -158,6 +157,24 @@ log.error("Looks like the datacenter just blew up?");
 					</li>
 				</ul>
 			</section>
+		</section>
+
+		<section class='content-sizer section'>
+
+			<h3>ERROR HANDLER</h3>
+
+			<p>If you use log.error() as recommended, for serious / exceptional errors only, then you'll probably want to take some further action besides just logging the error to console. i.e. send the error to an aggregation service (we use Sentry at Qwilr and love it). When instantiating your Qwilr Logger, you can pass an `errorHandler` option, which is a function that will be called with the error as an argument.</p>
+
+<pre class='prettyprint'>
+// Attaching a custom error handler function
+var otherLogger = qwilrLogger({
+	name: "Another Logger", 
+	errorHandler: function(error) {
+		// Do some error handling...		
+		// i.e. Send errors to an error aggregation service.
+	};
+});
+</pre>
 		</section>
 		
 <!-- 
