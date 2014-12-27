@@ -1,0 +1,21 @@
+{
+  "name": "QwilrLogger",
+  "version": "1.5.6",
+  "homepage": "https://github.com/dylan-baskind/qwilr-logger",
+  "authors": [
+    "Dylan Baskind <dylan.baskind@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "~3.0.2",
+    "less-mixins": "https://github.com/dylan-baskind/less-mixins.git",
+    "lesshat": "~3.0.2"
+  }
+}

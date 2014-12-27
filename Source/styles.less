@@ -1,0 +1,52 @@
+@import (less) "../bower_components/normalize-css/normalize.css";
+@import "../bower_components/lesshat/build/lesshat";
+@import "../bower_components/less-mixins/Mixins";
+
+body{
+	padding:0;
+	font-family: "Open Sans", sans;
+	font-weight:400;
+	h2,h3,h4{
+		font-weight:600;
+	}
+}
+
+.light{
+	font-weight:300;
+}
+
+.row{
+	max-width:1280px;
+	margin:0 auto;
+}
+
+.content-sizer{
+	max-width: 800px;
+	margin:0 auto;
+}
+
+pre.prettyprint{
+	background:darken(#fff, 2%);
+	border:none;
+	padding:25px;
+	border:1px solid darken(#fff, 8%);
+}
+
+@color:#FF5775;
+
+.header{
+	background:@color;
+	color:#fff;
+	height:40vh;
+	.center;
+	text-align: center;
+	h1{
+		text-transform: uppercase;
+		font-weight: normal;
+	}
+
+	p{	
+		.light;
+		letter-spacing: 0.1em;
+	}
+}

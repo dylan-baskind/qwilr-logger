@@ -1,0 +1,19 @@
+{
+  "name": "Dylans Less Mixins",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dylan-baskind/less-mixins",
+  "authors": [
+    "Dylan Baskind <dylan.baskind@gmail.com>"
+  ],
+  "description": "My personal collection of less-mixins and shortcuts",
+  "main": "Mixins.less",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
