@@ -7,8 +7,8 @@
 	Or we can use the log.at "Some Function"
 	Loggers also have names.
 ###
-_ = require "lodash"
 
+_ = require "lodash"
 module.exports = (options) ->
 
 	# Can supply log name as the only argument 
@@ -70,10 +70,10 @@ module.exports = (options) ->
 		log colors.red( "ERROR: ", data )
 		log colors.red("------------------------------")
 
-		# If we have Raven installed
-		if options.raven?
-			# Capture the error + logger name
-			options.raven.captureError( options.name + ": " + data )
+		# If we have an error handler function supplied.
+		if options.errorHandler?
+			# Run error handler fn w/ the error + logger name
+			options.errorHandler( options.name + ": " + data )
 
 	log.success = (data...) ->
 		log colors.green( data )
