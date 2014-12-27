@@ -32,13 +32,12 @@ if (crazyError){
 };
 
 // Note you can attach a custom error handler function
-var errorHandler = function(error) {
-	// Do some error handling...		
-	// i.e. Send errors to an error aggregation service.
-};
 var otherLogger = qwilrLogger({
 		name: "Another Logger", 
-		errorHandler: errorHandler
+		errorHandler: function(error) {
+			// Do some error handling...		
+			// i.e. Send errors to an error aggregation service.
+		};
 	});
 ```
 
