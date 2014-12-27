@@ -19,34 +19,45 @@
 		
 		<section class='header'>
 			<div class='content'>
+				<img src="Source/Logo.svg" />
 				<h1>Qwilr Logger</h1>
 				<p>Simple logging utility for Node.js</p>
+				<img class='arrow' src="Source/ArrowDown.svg" />
 			</div>
 		</section>
 
-		<section class='what-is'>
+		<section class='what-is section'>
 			<div class='content-sizer'>
-				<h3 class='title'>Why Qwilr Logger?</h3>
-				<p>Qwilr Logger aims to create "narrative" logs for asynchronous environments like Node.js. Narrative logs are those which make it easier to trace the execution path of our code. We use it every day at https://qwilr.com</p> 
+				<h3 class='title'>Narrative Logs</h3>
+				<p>Qwilr Logger helps create "narrative" logs for asynchronous environments like Node.js. Narrative logs are those which make it easier to trace the execution path of our code. We use it every day at <a href="https://qwilr.com">https://qwilr.com</a></p> 
 
 				<img src="Source/Example.jpg" />
 			</div>
 		</section>
 		
-		<section class='installation'>
+		<section class='installation-usage section'>
 			<div class='content-sizer'>
 				<h3>Installation</h3>
 				<pre class='prettyprint'>$ npm install qwilr-logger --save</pre>
 
 				<h3>Usage</h3>
 				<pre class="prettyprint">
-var yourLogger = logger("loggerName");
+// Require Qwilr Logger
+var qwilrLogger = require("qwilr-logger");
+
+// Instantiate a new logger, with the name 'someLogName'
+var log = qwilrLogger("someLogName");
+
+// Log Some Messages
 log("Log something");
 log.at("Main Controller");
 
 // Note you can attach a custom error handler function
 // i.e. Send errors to an error aggregation service.
-log.error("Just had a crazy error");
+var crazyError = true;
+if (crazyError){
+  log.error("Just had a crazy error");
+};
 				</pre>
 				
 
@@ -54,46 +65,132 @@ log.error("Just had a crazy error");
 		</section>
 
 
-		<section class='features'>
+		<section class='features section'>
 			<section class='names content-sizer'>
 				<h4>Named Loggers</h4>
 				<p>
-					Qwilr Logger's are named because its useful to know where a particular log message originated from in the source code.
+					Qwilr Logger's are named because its useful to know where a particular log message originated from in the source code. Names are assigned when instantiating the logger.
 				</p>
+
+				<pre class='prettyprint'>
+var loggerOne = qwilrLogger("Logger One");
+var loggerTwo = qwilrLogger("Logger Two");
+var loggerThree = qwilrLogger("Logger Three");
+
+loggerOne("Print this");
+loggerTwo("Print that");
+loggerOne.note("Note this");
+loggerTwo.warn("Warn that");
+loggerThree.success("This worked");</pre>
+			
+			<p>Outputs with: </p>
+			<img src="/Source/NamedLoggers.jpg" />
 			</section>
 
 			<section class='action-functions content-sizer'>
-				<h4>Action Functions</h4>
+				<h4>A Richer Vocabulary</h4>
 				<p>
 					Besides the standard log.error() log.warn(), when tracing the execution path of code, it can be instructive to log code markers i.e. being "at" a particular location in the codebase, or when a function is "doing" something etc. 
 				</p>
+
+				<p>Qwilr Logger includes the following logging functions: </p>
+
+				<ul>
+					<li>
+						<p>
+							<code class='name'>log.at()</code>
+							used to describe when code is at the entry point of a module or controller function.
+							<pre class='prettyprint'>log.at("Login Controller");</pre>
+						</p>
+					</li>
+
+					<li>
+						<p>
+							<code class='name'>log.doing()</code>
+							marks the beginning of an asynchronous block of code.
+							<pre class='prettyprint'>
+log.doing("Requesting JSON");
+someLongAsyncRequest().then(result, function() .... )</pre>
+						</p>
+					</li>
+
+					<li>
+						<p>
+							<code class='name'>log.note()</code>
+							log a note about the code execution path.
+							<pre class='prettyprint'>
+log.note("User password matched - good credentials");</pre>
+						</p>
+					</li>
+
+					<li>
+						<p>
+							<code class='name'>log.success()</code>
+							marks the success of some block of code.
+							<pre class='prettyprint'>
+doSomeDatabaseAction().then( function(err, result){
+  if (result){
+    log.success("Saved record to database");
+  }
+});
+</pre>
+						</p>
+					</li>
+
+					<li>
+						<p>
+							<code class='name'>log.warn()</code>
+							marks a handled error - i.e. an error case that is handled, and non-critical
+							<pre class='prettyprint'>
+log.warn("Sign up form got bad inputs - sending error data back to user");
+</pre>
+						</p>
+					</li>
+
+					<li>
+						<p>
+							<code class='name'>log.error()</code>
+							marks a serious error - something that signals a mistake in the code itself.
+							<pre class='prettyprint'>
+log.error("Looks like the datacenter just blew up?");
+</pre>
+						</p>
+					</li>
+				</ul>
 			</section>
 		</section>
+		
+<!-- 
+		<section class='qwilr'>
+			<p>Qwilr Logger is an open source project by Team Qwilr.</p>
+		</section> -->
 
-		<section class='authors'>
-			<div class='content-sizer'>
-				<h3>Authors</h3>
-				<ul>
-					<li>Dylan Baskind</li>
-				</ul>
-			</div>
-		</section>
+		<div class='appendix'>
+			<section class='authors'>
+				<div class='content-sizer'>
+					<h3>Authors</h3>
+					<ul>
+						<li>Dylan Baskind</li>
+					</ul>
+				</div>
+			</section>
 
-		<section class='license'>
-			<div class='content-sizer'>
-				<h4>License</h4>
+			<section class='license'>
+				<div class='content-sizer'>
+					<h4>License</h4>
 
-				<p>(The MIT License)</p>
+					<p>(The MIT License)</p>
 
-				<p>Copyright (c) 2014 Dylan Baskind <dylan@qwilr.com></p>
+					<p>Copyright (c) 2014 Dylan Baskind</p>
 
-				<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+					<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
 
-				<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+					<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 
-				<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-			</dylan@qwilr.com>
-		</section>
+					<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+				</dylan@qwilr.com>
+			</section>
+		</p>
 
 
 

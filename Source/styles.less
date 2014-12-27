@@ -2,17 +2,31 @@
 @import "../bower_components/lesshat/build/lesshat";
 @import "../bower_components/less-mixins/Mixins";
 
+.light{
+	font-weight:300;
+}
 body{
 	padding:0;
 	font-family: "Open Sans", sans;
 	font-weight:400;
-	h2,h3,h4{
-		font-weight:600;
-	}
 }
 
-.light{
-	font-weight:300;
+img{
+	max-width:100%;
+}
+
+h2,h3,h4{
+	font-weight:600;
+}
+
+h2{
+	font-size:30px;
+}
+
+p{
+	.light;
+	color:darken(#fff, 70%);
+	line-height: 1.75;
 }
 
 .row{
@@ -32,21 +46,95 @@ pre.prettyprint{
 	border:1px solid darken(#fff, 8%);
 }
 
+.what-is{
+	padding:4vw;
+	border-bottom:1px solid darken(#fff, 6%);
+}
+
 @color:#FF5775;
 
 .header{
-	background:@color;
+	background:darken(@color, 5% );
 	color:#fff;
-	height:40vh;
+	padding-top:15vh;
 	.center;
 	text-align: center;
+	img{
+		opacity:0.8;
+		margin-bottom:20px;
+	}
 	h1{
 		text-transform: uppercase;
 		font-weight: normal;
+		font-size:40px;
+		margin:10px;
 	}
 
 	p{	
+		color:fade(#fff, 90%);
 		.light;
+		text-transform: uppercase;
+		font-style:italic;
 		letter-spacing: 0.1em;
+	}
+
+	.arrow{
+		width:26px;
+		padding:50px;
+	}
+}
+
+.section{
+	padding:6vw;
+}
+
+.what-is{
+	text-align: center;
+	.title{
+		text-transform: uppercase;
+		font-weight:400;
+		letter-spacing: 0.2em;
+	}
+}
+
+.features{
+	border-top:1px solid darken(#fff, 5%);
+	border-bottom:1px solid darken(#fff, 5%);
+
+	h4{
+		text-transform: uppercase;
+		font-weight:400;
+		letter-spacing: 0.2em;
+	}
+
+	> section{
+		margin:4vw auto;
+		&:first-child{
+			margin-top:0;
+		}
+		&:last-child{
+			margin-bottom:0;
+		}
+	}
+}
+
+.action-functions{
+	ul{
+		padding-left:0;
+		li{
+			margin-left:0;
+			list-style-type: none;
+			margin-bottom:70px;
+		}
+	}
+}
+
+.appendix{
+	background:darken(#fff, 1.5%);
+	.authors{
+		padding:5vw 0 2vw;
+		h3{
+			margin-top:0;
+		}
 	}
 }
