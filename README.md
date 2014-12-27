@@ -18,19 +18,28 @@ Qwilr Logger helps create "narrative" logs for asynchronous environments like No
 // Require Qwilr Logger
 var qwilrLogger = require("qwilr-logger");
 
-// Instantiate a new logger, with the name 'someLogName'
-var log = qwilrLogger("someLogName");
+// Instantiate a new logger, with the name 'Example Logger'
+var log = qwilrLogger({name: "Example Logger"});
 
 // Log Some Messages
 log("Log something");
 log.at("Main Controller");
 
-// Note you can attach a custom error handler function
-// i.e. Send errors to an error aggregation service.
+// Log an Error
 var crazyError = true;
 if (crazyError){
   log.error("Just had a crazy error");
 };
+
+// Note you can attach a custom error handler function
+var errorHandler = function(error) {
+	// Do some error handling...		
+	// i.e. Send errors to an error aggregation service.
+};
+var otherLogger = qwilrLogger({
+		name: "Another Logger", 
+		errorHandler: errorHandler
+	});
 ```
 
 ### NAMED LOGGERS
@@ -38,9 +47,9 @@ if (crazyError){
 Qwilr Logger's are named because its useful to know where a particular log message originated from in the source code. Names are assigned when instantiating the logger.
 
 ```javascript
-var loggerOne = qwilrLogger("Logger One");
-var loggerTwo = qwilrLogger("Logger Two");
-var loggerThree = qwilrLogger("Logger Three");
+var loggerOne = qwilrLogger({ name: "Logger One" });
+var loggerTwo = qwilrLogger({ name: "Logger Two" });
+var loggerThree = qwilrLogger({ name: "Logger Three" });
 
 loggerOne("Print this");
 loggerTwo("Print that");
@@ -92,6 +101,10 @@ doSomeDatabaseAction().then( function(err, result){
 `log.error()` marks a serious error - something that signals a mistake in the code itself.
 
 `log.error("Looks like the datacenter just blew up?");`
+
+### ERROR HANDLER
+
+If you use log.error() as recommended, for serious / exceptional errors only, then you'll probably want to store that error with an aggregation service (we use Sentry at Qwilr and love it). So
 
 
 ###Authors
