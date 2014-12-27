@@ -30,15 +30,6 @@ var crazyError = true;
 if (crazyError){
   log.error("Just had a crazy error");
 };
-
-// Note you can attach a custom error handler function
-var otherLogger = qwilrLogger({
-		name: "Another Logger", 
-		errorHandler: function(error) {
-			// Do some error handling...		
-			// i.e. Send errors to an error aggregation service.
-		};
-	});
 ```
 
 ### NAMED LOGGERS
@@ -103,7 +94,18 @@ doSomeDatabaseAction().then( function(err, result){
 
 ### ERROR HANDLER
 
-If you use log.error() as recommended, for serious / exceptional errors only, then you'll probably want to store that error with an aggregation service (we use Sentry at Qwilr and love it). So
+If you use log.error() as recommended, for serious / exceptional errors only, then you'll probably want to take some further action besides just logging the error to console. i.e. send the error to an aggregation service (we use Sentry at Qwilr and love it). When instantiating your Qwilr Logger, you can pass an `errorHandler` option, which is a function that will be called with the error as an argument.
+
+```javascript
+// Attaching a custom error handler function
+var otherLogger = qwilrLogger({
+	name: "Another Logger", 
+	errorHandler: function(error) {
+		// Do some error handling...		
+		// i.e. Send errors to an error aggregation service.
+	};
+});
+```
 
 
 ###Authors
