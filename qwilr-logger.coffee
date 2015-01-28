@@ -31,7 +31,7 @@ module.exports = (options) ->
 	# so that log prints nothing...
 	if options?.debug is no
 		log = ->
-		stubs = ['at', 'doing', 'say', 'success', 'error', 'note']
+		stubs = ['at', 'warn', 'doing', 'say', 'success', 'error', 'note']
 		for stubFn in stubs
 			log[stubFn] = ->
 		return log
