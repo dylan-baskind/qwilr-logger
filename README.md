@@ -99,14 +99,19 @@ If you use log.error() as recommended, for serious / exceptional errors only, th
 ```javascript
 // Attaching a custom error handler function
 var otherLogger = qwilrLogger({
-	name: "Another Logger", 
+	name: "Another Logger",
 	errorHandler: function(error) {
-		// Do some error handling...		
+		// Do some error handling...
 		// i.e. Send errors to an error aggregation service.
 	};
 });
 ```
 
+### HELPER LOGGING FUNCTIONS
+
+If in the options object you pass in a `onLog` function, this will be called on each log message.
+
+The `onLog` function is called with the log verb, name and message arguments.
 
 ###Authors
 
