@@ -52,7 +52,7 @@ module.exports = (options) ->
 		logBase 'info', args
 
 
-	logBase = (verb, data...) ->
+	logBase = (verb, args...) ->
 		# We can set the logger to silent
 		# with this Node environment flag
 		return if process.env.SILENT_LOGGING?
