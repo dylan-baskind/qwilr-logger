@@ -8,48 +8,62 @@
 	Loggers also have names.
 ###
 
-_ = require "lodash"
+_      = require "lodash"
+colors = require 'colors/safe'
 module.exports = (options) ->
 
 	# Can supply log name as the only argument
 	# aka: require('qwilr-logger')('log-name')
 	# OR, as part of the options object.
 	# aka: require('qwilr-logger')(debug: yes, name: 'log-name')
+	# OR, as a function
+	# aka: require('qwilr-logger')(name: () -> 'log-name')
 	logName =
 		if _.isString(options)
-			options + " "
+			() -> options + " "
 		else if options.name? and _.isFunction options.name
-			options.name() + " "
+			options.name
 		else if options.name?
-			options.name + " "
+			() -> options.name + " "
 		else
-			""
+			() -> ""
 
-	# We'll default to debug mode, unless specified.
-	options.debug ?= yes
+	# We'll default to debug mode
+	debug ?= options.debug || yes
 
 	# Stub out the functions
 	# if we're not in debug mode
 	# so that log prints nothing...
-	if options?.debug is no
+	if debug is no
 		log = ->
 		stubs = ['at', 'warn', 'doing', 'say', 'success', 'error', 'note']
 		for stubFn in stubs
 			log[stubFn] = ->
 		return log
 
-	colors = require('colors/safe')
+	# onLog is called when outputting the log message, it is passed the name
+	if options.onLog? and _.isFunction options.onLog
+		onLog = options.onLog
+	else
+		onLog = (verb, name, args...) ->
+
 
 	log = (args...) ->
+		logBase 'info', args
+
+
+	logBase = (verb, data...) ->
 		# We can set the logger to silent
 		# with this Node environment flag
 		return if process.env.SILENT_LOGGING?
+		name = logName()
 
-		args.unshift colors.grey(logName)
+		args.unshift colors.grey(name)
 		console.log.apply( console, args )
+		onLog verb, name, args
 
 	log.warn = (data...) ->
-		log colors.yellow( data )
+		logBase 'warn', colors.yellow( data )
 
 	log.at = (data) ->
 		# Space gets output without silent logging.
@@ -58,30 +72,30 @@ module.exports = (options) ->
 
 		# NOTE: 7 = "AT: " + a little extra space
 		border = Array(data.length + 7).join '-'
-		log colors.magenta(border)
-		log colors.magenta("AT: ", data )
-		log colors.magenta(border)
+		logBase 'at', colors.magenta(border)
+		logBase 'at', colors.magenta("AT: ", data )
+		logBase 'at', colors.magenta(border)
 
 	log.doing = (data...) ->
-		log colors.blue( data )
+		logBase 'doing', colors.blue( data )
 
 	log.say = (data...) ->
-		log data
+		logBase 'say', data
 
 	log.error = (data...) ->
-		log colors.red( "ERROR: ", data )
-		log colors.red("------------------------------")
+		logBase 'error', colors.red( "ERROR: ", data )
+		logBase 'error', colors.red("------------------------------")
 
 		# If we have an error handler function supplied.
 		if options.errorHandler?
 			# Run error handler fn w/ the error + logger name
-			options.errorHandler( options.name + ": " + data )
+			options.errorHandler( logName() + ": " + data )
 
 	log.success = (data...) ->
-		log colors.green( data )
+		logBase 'success', colors.green( data )
 
 	log.note = (data...) ->
-		log colors.cyan( data )
+		logBase 'note', colors.cyan( data )
 
 	return log
 
