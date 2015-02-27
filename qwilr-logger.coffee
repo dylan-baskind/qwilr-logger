@@ -29,7 +29,7 @@ module.exports = (options) ->
 			() -> ""
 
 	# We'll default to debug mode
-	debug ?= options.debug || yes
+	debug = options.debug || yes
 
 	# Stub out the functions
 	# if we're not in debug mode
