@@ -89,7 +89,7 @@ module.exports = (options) ->
 		# If we have an error handler function supplied.
 		if options.errorHandler?
 			# Run error handler fn w/ the error + logger name
-			options.errorHandler( logName() + ": " + data )
+			options.errorHandler( data )
 
 	log.success = (data...) ->
 		logBase 'success', colors.green( data )
